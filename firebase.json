@@ -5,8 +5,9 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "project-list-admin.html",
-      "project-detail-admin.html"
+      "admin.html",
+      "admin.js",
+      "auth.js"
     ]
   }
 }

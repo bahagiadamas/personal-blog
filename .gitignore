@@ -67,3 +67,8 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+#HTML PAGE
+admin.html
+admin.js
+auth.js
