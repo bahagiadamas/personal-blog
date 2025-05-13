@@ -72,7 +72,7 @@ async function initScrollReveal() {
 }
 
 function initFavicon() {
-  const faviconUrl = "/assets/img/logo.png";
+  const faviconUrl = "assets/img/logo.png";
 
   let favicon = document.querySelector("link[rel~='icon']");
 
