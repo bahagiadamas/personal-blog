@@ -1,0 +1,52 @@
+:root {
+  /* THEME */
+  --color-bg: #fafafa;
+  --color-surface: #f0f4f9;
+  --color-hover: #e2e7eb;
+  --color-text-inverse: var(--color-bg);
+  --color-text: #41495a;
+  --color-primary: #e9eefa;
+  --color-accent: #005cbb;
+  --color-shadow: rgb(0 0 0 / 50%);
+  --swiper-pagination-color: var(--color-accent);
+  --swiper-pagination-bullet-inactive-color: var(--color-hover);
+  --swiper-pagination-bullet-inactive-opacity: 1;
+
+  /* FONT SIZE */
+  --font-0: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem);
+  --font-1: clamp(1.25rem, 1.1787rem + 0.3566vw, 1.4996rem);
+  --font-2: clamp(1.5625rem, 1.4378rem + 0.6236vw, 1.999rem);
+  --font-3: clamp(1.9531rem, 1.7498rem + 1.0165vw, 2.6647rem);
+  --font-4: clamp(2.4414rem, 2.1241rem + 1.5866vw, 3.552rem);
+
+  /* SPACING */
+  --space-xs: clamp(0.5rem, 0.4821rem + 0.0893vw, 0.5625rem);
+  --space-s: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem);
+  --space-m: clamp(1.5rem, 1.4464rem + 0.2679vw, 1.6875rem);
+  --space-l: clamp(2rem, 1.9286rem + 0.3571vw, 2.25rem);
+  --space-xl: clamp(2.5rem, 2.4107rem + 0.4464vw, 2.8125rem);
+  --space-2xl: clamp(3rem, 2.8929rem + 0.5357vw, 3.375rem);
+  --space-xs-s: clamp(0.5rem, 0.3214rem + 0.8929vw, 1.125rem);
+  --space-s-m: clamp(1rem, 0.8036rem + 0.9821vw, 1.6875rem);
+  --space-m-l: clamp(1.5rem, 1.2857rem + 1.0714vw, 2.25rem);
+  --space-l-xl: clamp(2rem, 1.7679rem + 1.1607vw, 2.8125rem);
+  --space-xl-2xl: clamp(2.5rem, 2.25rem + 1.25vw, 3.375rem);
+  --space-s-l: clamp(1rem, 0.6429rem + 1.7857vw, 2.25rem);
+  --space-s-xl: clamp(1rem, 0.4821rem + 2.5893vw, 2.8125rem);
+  --space-m-xl: clamp(1.5rem, 1.125rem + 1.875vw, 2.8125rem);
+  --backdrop-blur-radius: 2px;
+}
+
+body.dark-mode {
+  --color-bg: #1b1c1d;
+  --color-surface: #282a2c;
+  --color-hover: #35383a;
+  --color-text-inverse: var(--color-bg);
+  --color-text: #e1e7e0;
+  --color-primary: #262931;
+  --color-accent: #00bdd7;
+  --color-shadow: rgb(255 255 255 / 50%);
+  --swiper-pagination-color: var(--color-accent);
+  --swiper-pagination-bullet-inactive-color: var(--color-hover);
+  --swiper-pagination-bullet-inactive-opacity: 1;
+}
