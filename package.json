@@ -1,0 +1,18 @@
+{
+  "name": "project-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Damas Bahagia Ika Cipta",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "stylelint": "^16.19.1",
+    "stylelint-config-standard": "^38.0.0",
+    "stylelint-order": "^7.0.0"
+  }
+}

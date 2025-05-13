@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer type="module" src="js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Project List - Admin Panel</title>
+  </head>
+  <body id="list-page">
+    <nav id="sidebar">
+      <div class="sidebar-wrapper">
+        <ul class="logo">
+          <li>
+            <span class="text">LOGO</span>
+            <ion-icon
+              id="toggleSidebar"
+              class="icon"
+              name="menu-outline"
+            ></ion-icon>
+          </li>
+        </ul>
+        <ul class="navigations">
+          <li>
+            <div id="toggleSubmenu" class="dropdown-btn">
+              <ion-icon class="icon" name="home-outline"></ion-icon>
+              <span class="text">Home</span>
+              <ion-icon class="icon" name="chevron-down-outline"></ion-icon>
+            </div>
+            <ul class="sub-menu">
+              <div>
+                <li><a href="index.html#hero">Main</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#project">Projects</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+              </div>
+            </ul>
+          </li>
+          <li>
+            <div id="toggleSubmenu" class="dropdown-btn">
+              <ion-icon class="icon" name="folder-outline"></ion-icon>
+              <span class="text">Initiatives</span>
+              <ion-icon class="icon" name="chevron-down-outline"></ion-icon>
+            </div>
+            <ul id="navPlaceholder" class="sub-menu">
+              <div>
+                <li><a href="index.html#hero">Main</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#project">Projects</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+              </div>
+            </ul>
+          </li>
+        </ul>
+        <ul class="settings">
+          <li>
+            <div class="theme-toggler">
+              <ion-icon class="icon" name="contrast-outline"></ion-icon>
+              <span class="text">Theme</span>
+              <label class="switch">
+                <input type="checkbox" id="toggleTheme" />
+                <span class="slider round">
+                  <ion-icon class="icon" name="sunny-outline"></ion-icon>
+                </span>
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div id="overlay" class="sidebar-overlay"></div>
+
+    <main>
+      <section id="project-list">
+        <div class="container">
+          <div id="addProjectBtn">
+            <ion-icon name="add-circle-outline"></ion-icon>
+            <span>Add Project</span>
+          </div>
+          <h2>My Project & Initiatives</h2>
+          <div id="project-wrapper" class="project-wrapper"></div>
+        </div>
+      </section>
+
+      <div id="message"></div>
+
+      <div id="modalForm" class="modal">
+        <div class="modal-content">
+          <h4>Add Project</h4>
+          <form id="newProject">
+            <div class="input-group">
+              <label for="imageUpload">Uplaod Image: </label>
+              <input type="file" id="imageUpload" accept="image/*" required />
+            </div>
+            <div class="input-group">
+              <label for="title">Title: </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                autocomplete="off"
+                placeholder=""
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="description">Description: </label>
+              <div id="editor-container"></div>
+              <input type="hidden" id="description" name="description" />
+            </div>
+            <div class="form-button">
+              <button id="closeForm" type="button">Close</button>
+              <button type="submit">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="overlay"></div>
+    </main>
+
+    <script type="module" src="js/modules/database.js"></script>
+    <script type="module" src="js/modules/project.list.js"></script>
+  </body>
+</html>
