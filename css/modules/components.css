@@ -584,6 +584,29 @@ footer .container {
   }
 }
 
+.delete-project .modal-content {
+  * {
+    margin-block: var(--space-xs);
+  }
+
+  .modal-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+
+    button {
+      padding: var(--space-xs);
+      color: var(--color-text);
+      background: var(--color-hover);
+      border-radius: var(--space-xs);
+    }
+
+    .delete-btn {
+      background: #f44336;
+    }
+  }
+}
+
 /* QUILL HANDLER */
 form .ql-toolbar.ql-snow {
   padding: 0;
