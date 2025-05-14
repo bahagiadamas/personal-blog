@@ -603,7 +603,9 @@ section#contact form {
 
 /* PROJECT LIST */
 body#list-page,
-body#detail-page {
+body#detail-page,
+body#new-project,
+body#edit-project {
   display: grid;
   grid-template-columns: auto 1fr;
 }
@@ -772,7 +774,7 @@ section#project-detail {
   grid-template-columns: auto 1fr;
 }
 
-section#table-list {
+section#admin-page {
   min-height: 100dvh;
   max-width: 100dvw;
   padding-top: calc(48px + var(--space-l));
@@ -781,79 +783,104 @@ section#table-list {
     position: relative;
     max-width: 100%;
 
-    #addItem {
+    .login-handler {
       position: absolute;
       top: 0;
       right: var(--space-s-l);
       display: flex;
-      align-items: center;
-      gap: var(--space-xs);
-      padding: var(--space-xs);
-      color: var(--color-text-inverse);
-      background: var(--color-accent);
-      border-radius: var(--space-xs);
-      cursor: pointer;
-      user-select: none;
-    }
+      gap: var(--space-s);
 
-    table {
-      width: 100%;
-      margin: var(--space-m) 0;
-      border-collapse: collapse;
-      overflow-x: scroll;
-
-      thead {
-        position: sticky;
-        top: 0;
-        left: 0;
-        background: var(--color-primary);
-
-        th {
-          padding: var(--space-xs);
-        }
-      }
-
-      tbody tr {
-        text-overflow: ellipsis;
-      }
-
-      tbody tr:nth-child(even) {
-        background-color: var(--color-hover);
-      }
-
-      tbody tr td {
-        max-width: 250px;
-        padding: var(--space-xs);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      tbody tr td.action_button {
-        display: flex;
+      button {
         justify-content: center;
         align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-xs);
+        color: var(--color-text-inverse);
+        background: var(--color-accent);
+        border-radius: var(--space-xs);
+        cursor: pointer;
+      }
+    }
 
-        span {
-          margin-inline: 5px;
+    .logged-in {
+      margin-block: var(--space-m);
 
-          ion-icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+      #addItem {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-xs);
+        color: var(--color-text-inverse);
+        background: var(--color-accent);
+        border-radius: var(--space-xs);
+        cursor: pointer;
+        user-select: none;
+      }
+
+      table {
+        width: 100%;
+        margin: var(--space-m) 0;
+        border-collapse: collapse;
+        overflow-x: scroll;
+
+        caption {
+          position: relative;
+          text-align: left;
+          margin-block: var(--space-s);
+        }
+
+        thead {
+          position: sticky;
+          top: 0;
+          left: 0;
+          background: var(--color-primary);
+
+          th {
             padding: var(--space-xs);
-            color: var(--color-text-inverse);
-            border-radius: var(--space-xs);
-            cursor: pointer;
           }
         }
 
-        span.edit-btn ion-icon {
-          background: var(--color-accent);
+        tbody tr {
+          text-overflow: ellipsis;
         }
 
-        span.delete-btn ion-icon {
-          background: rgb(208 21 21);
+        tbody tr:nth-child(even) {
+          background-color: var(--color-hover);
+        }
+
+        tbody tr td {
+          padding: var(--space-xs);
+        }
+
+        tbody tr td.action_button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          span {
+            margin-inline: 5px;
+
+            ion-icon {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: var(--space-xs);
+              color: var(--color-text-inverse);
+              border-radius: var(--space-xs);
+              cursor: pointer;
+            }
+          }
+
+          span.edit-btn ion-icon {
+            background: var(--color-accent);
+          }
+
+          span.delete-btn ion-icon {
+            background: rgb(208 21 21);
+          }
         }
       }
     }
@@ -866,8 +893,16 @@ section#table-list {
 
   button {
     padding: var(--space-xs);
+    color: var(--color-text-inverse);
     background: var(--color-accent);
     border-radius: var(--space-xs);
     cursor: pointer;
   }
+}
+
+/* NEW PROJECT PAGE */
+section#new-post,
+section#edit-post {
+  min-height: 100dvh;
+  padding-top: calc(48px + var(--space-m));
 }
