@@ -181,7 +181,6 @@ function handleAuthState(user) {
 
 async function adminInit() {
   auth.onAuthStateChanged(handleAuthState);
-  addItem();
 }
 
 document.addEventListener("DOMContentLoaded", adminInit);
