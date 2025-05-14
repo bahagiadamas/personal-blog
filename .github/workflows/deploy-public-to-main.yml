@@ -1,0 +1,24 @@
+name: Deploy Public to Main
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 
+
+      - name: Push public folder to main branch
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          git subtree split --prefix=public -b deploy-branch
+          git push -f origin deploy-branch:main
