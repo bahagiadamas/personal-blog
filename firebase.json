@@ -4,10 +4,7 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**",
-      "admin.html",
-      "admin.js",
-      "auth.js"
+      "**/node_modules/**"
     ]
   }
 }
