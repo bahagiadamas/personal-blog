@@ -3,6 +3,7 @@
 @import url("./modules/variables.css");
 @import url("./modules/components.css");
 @import url("./modules/pages.css");
+@import url("https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css");
 
 html {
   scroll-behavior: smooth;

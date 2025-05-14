@@ -237,12 +237,17 @@ header .container {
 #sidebar .dropdown-btn,
 #sidebar .theme-toggler,
 #sidebar .logo li,
-#sidebar a {
+#sidebar a,
+#sidebar .admin-page a {
   display: flex;
   align-items: center;
   gap: var(--space-m);
   padding: 0.65em;
   border-radius: var(--space-s);
+}
+
+#sidebar .admin-page {
+  white-space: nowrap;
 }
 
 #sidebar .dropdown-btn,
@@ -511,102 +516,6 @@ footer .container {
   }
 }
 
-/* MODAL HANDLER */
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 11;
-  width: min(80%, 700px);
-  padding: var(--space-m);
-  background: var(--color-surface);
-  border-radius: var(--space-s);
-  opacity: 0;
-  transition: all 500ms ease-in-out;
-  transform: translate(-50%, -50%);
-  visibility: hidden;
-}
-
-.modal.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal.open ~ #overlay {
-  z-index: 10;
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  color: var(--color-text);
-  margin-block: var(--space-s);
-
-  .input-group {
-    display: flex;
-    flex-direction: column;
-
-    input {
-      padding: var(--space-xs);
-      color: inherit;
-      background: var(--color-hover);
-      border: 1px solid transparent;
-      border-radius: var(--space-xs);
-
-      &:focus {
-        border-color: var(--color-accent) / 50%;
-      }
-    }
-  }
-
-  .form-button {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--space-s);
-    width: 100%;
-
-    button {
-      padding: var(--space-xs);
-      color: var(--color-text-inverse);
-      background: var(--color-accent);
-      border-radius: var(--space-xs);
-      cursor: pointer;
-    }
-
-    button:first-child {
-      color: var(--color-text);
-      background: var(--color-hover);
-    }
-  }
-}
-
-.delete-project .modal-content {
-  * {
-    margin-block: var(--space-xs);
-  }
-
-  .modal-btn {
-    display: flex;
-    align-items: center;
-    gap: var(--space-m);
-
-    button {
-      padding: var(--space-xs);
-      color: var(--color-text);
-      background: var(--color-hover);
-      border-radius: var(--space-xs);
-    }
-
-    .delete-btn {
-      background: #f44336;
-    }
-  }
-}
-
 /* QUILL HANDLER */
 form .ql-toolbar.ql-snow {
   padding: 0;
@@ -618,7 +527,7 @@ form .ql-toolbar.ql-snow {
 }
 
 form .ql-container.ql-snow {
-  height: calc(9 * 1.5em);
+  min-height: calc(9 * calc(1em + 0.5rem));
   padding: var(--space-xs);
   background: var(--color-hover);
   border: none;
@@ -635,7 +544,7 @@ form .ql-container.ql-snow {
   bottom: var(--space-l);
   left: 50%;
   padding: var(--space-xs);
-  color: #fff;
+  color: #fafafa;
   border-radius: var(--space-xs);
   opacity: 0;
   transition: opacity 1500ms ease-in-out, visibility 1500ms ease-in-out;
@@ -654,4 +563,49 @@ form .ql-container.ql-snow {
 #message.show {
   opacity: 1;
   visibility: visible;
+}
+
+/* EDITOR HANDLER */
+.editor-container {
+  margin-block: var(--space-m);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+
+      input {
+        padding: var(--space-xs);
+        color: var(--color-text);
+        background: var(--color-hover);
+        border-radius: var(--space-xs);
+      }
+    }
+
+    .form-button {
+      display: flex;
+      gap: var(--space-m);
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: var(--space-xs);
+        color: var(--color-text);
+        background: var(--color-hover);
+        border-radius: var(--space-xs);
+        cursor: pointer;
+      }
+
+      button:last-child {
+        color: var(--color-text-inverse);
+        background: var(--color-accent);
+      }
+    }
+  }
 }

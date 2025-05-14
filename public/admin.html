@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer type="module" src="js/index.js"></script>
+    <script type="module" src="js/admin.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Admin Panel</title>
+  </head>
+  <body id="admin-panel">
+    <nav id="sidebar"></nav>
+    <div id="overlay" class="sidebar-overlay"></div>
+
+    <main>
+      <section id="admin-page">
+        <div class="container">
+          <h2>Admin Panel</h2>
+          <div class="login-handler">
+            <button id="loginGoogle">
+              <ion-icon class="icon" name="logo-google"></ion-icon>
+              <span class="text"> Login </span>
+            </button>
+            <button id="logoutGoogle">
+              <ion-icon class="icon" name="log-out-outline"></ion-icon>
+              <span class="text"> Logout </span>
+            </button>
+          </div>
+          <div class="logged-out">
+            <h3 class="auth-message"></h3>
+          </div>
+          <div class="logged-in">
+            <table>
+              <caption>
+                <h3>Project List</h3>
+                <div id="addItem">
+                  <ion-icon name="add-outline"></ion-icon>
+                  <span>Add Item</span>
+                </div>
+              </caption>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="list-placeholder"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <footer id="footer"></footer>
+    </main>
+  </body>
+</html>
