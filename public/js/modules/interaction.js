@@ -12,12 +12,10 @@ function closeNavbar() {
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
   sidebar.classList.toggle("open");
-
   if (!sidebar.classList.contains("open")) {
     document.querySelectorAll(".sub-menu").forEach((menu) => {
       menu.classList.remove("show");
     });
-
     document.querySelectorAll(".dropdown-btn").forEach((btn) => {
       btn.classList.remove("rotate");
     });
