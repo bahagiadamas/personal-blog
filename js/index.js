@@ -454,6 +454,7 @@ async function initializeApp() {
     // SIDEBAR INIT
     if (document.getElementById("sidebar")) {
       await loadNav();
+      
       document
         .getElementById("toggleSidebar")
         .addEventListener("click", toggleSidebar);

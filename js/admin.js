@@ -2,17 +2,13 @@ import { db, auth } from "./modules/database.js";
 import {
   collection,
   getDocs,
-  getDoc,
   doc,
   query,
   orderBy,
-  addDoc,
-  updateDoc,
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 import { signInWithGoogle, logoutAdmin } from "./auth.js";
 
-let quillEdit;
 
 async function getData(collectionName, orderByField = "createdAt") {
   try {
@@ -143,7 +139,6 @@ function handleAuthState(user) {
       authMessage.textContent =
         "You are not logged in, please login to verify your identity";
     }
-    console.log("Tidak ada pengguna yang login.");
   } else {
     if (loginGoogleBtn) {
       loginGoogleBtn.style.display = "none";
@@ -175,7 +170,6 @@ function handleAuthState(user) {
         authMessage.textContent = "You are not authorized to access this page.";
       }
     }
-    console.log("Pengguna login dengan UID:", user.uid);
   }
 }
 

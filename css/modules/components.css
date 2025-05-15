@@ -15,8 +15,8 @@ header {
 
 header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   height: 100%;
 
   .menubar {
@@ -25,8 +25,8 @@ header .container {
 
   .logo {
     display: flex;
-    align-items: center;
     gap: var(--space-s);
+    align-items: center;
     font-size: var(--font-2);
     user-select: none;
 
@@ -60,10 +60,10 @@ header .container {
   left: 0;
   width: 0;
   height: 8%;
+  content: "";
   background: var(--color-text);
   border-radius: 30px;
   transition: width 300ms ease-in-out;
-  content: "";
 }
 
 #navbar a:hover::before {
@@ -78,13 +78,13 @@ header .container {
 /* OVERLAY */
 #overlay {
   position: fixed;
+  inset: 0;
   z-index: -1;
+  visibility: hidden;
   background: rgb(0 0 0 / 30%);
   opacity: 0;
-  transition: all 750ms ease-in-out;
   backdrop-filter: blur(2px);
-  inset: 0;
-  visibility: hidden;
+  transition: all 750ms ease-in-out;
 }
 
 #overlay.menu-overlay {
@@ -93,13 +93,13 @@ header .container {
 
 @media (width <= 1024px) {
   header .container {
-    justify-content: flex-start;
     gap: var(--space-l);
+    justify-content: flex-start;
 
     .menubar {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       cursor: pointer;
 
       ion-icon {
@@ -143,18 +143,18 @@ header .container {
       position: relative;
       z-index: 1;
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin: var(--space-xs) 0;
+      justify-content: center;
       padding: 0.65em;
+      margin: var(--space-xs) 0;
       color: var(--color-text);
       border-radius: var(--space-s);
     }
 
     .theme-switch {
-      border-top: 2px solid var(--color-hover);
-      margin-top: auto;
       padding-top: var(--space-xs);
+      margin-top: auto;
+      border-top: 2px solid var(--color-hover);
 
       .text {
         user-select: none;
@@ -194,8 +194,8 @@ header .container {
   }
 
   #navbar.open ~ #overlay.menu-overlay {
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
   }
 }
 
@@ -208,9 +208,9 @@ header .container {
   width: 73px;
   height: 100dvh;
   padding: 0.75rem;
+  overflow: hidden;
   background: var(--color-primary);
   transition: width 500ms ease-in-out;
-  overflow: hidden;
 }
 
 #sidebar.open {
@@ -230,8 +230,8 @@ header .container {
 }
 
 .sidebar-wrapper .settings {
-  border-top: 2px solid var(--color-hover);
   margin-top: auto;
+  border-top: 2px solid var(--color-hover);
 }
 
 #sidebar .dropdown-btn,
@@ -240,8 +240,8 @@ header .container {
 #sidebar a,
 #sidebar .admin-page a {
   display: flex;
-  align-items: center;
   gap: var(--space-m);
+  align-items: center;
   padding: 0.65em;
   border-radius: var(--space-s);
 }
@@ -260,13 +260,13 @@ header .container {
 }
 
 #sidebar .sidebar-wrapper ul.logo {
-  border-bottom: 2px solid var(--color-hover);
   padding-bottom: 0.65em;
+  border-bottom: 2px solid var(--color-hover);
 
   li {
     display: flex;
-    justify-content: flex-end;
     gap: 0;
+    justify-content: flex-end;
     padding: 0;
     overflow: hidden;
 
@@ -276,14 +276,14 @@ header .container {
 
     .text {
       padding: 0.65em;
-      user-select: none;
       white-space: nowrap;
+      user-select: none;
     }
 
     .icon:last-child {
       padding: 0.65em;
-      border-radius: 50%;
       cursor: pointer;
+      border-radius: 50%;
 
       &:hover {
         background: var(--color-hover);
@@ -293,9 +293,9 @@ header .container {
 }
 
 .sidebar-wrapper .icon {
+  flex-shrink: 0;
   font-size: 1.25rem;
   transition: 300ms ease-in-out;
-  flex-shrink: 0;
 }
 
 .sidebar-wrapper .text {
@@ -308,8 +308,8 @@ header .container {
 
 .sidebar-wrapper .sub-menu {
   display: grid;
-  transition: 300ms ease-in-out;
   grid-template-rows: 0fr;
+  transition: 300ms ease-in-out;
 
   > div {
     overflow: hidden;
@@ -367,11 +367,11 @@ header .container {
 
 .slider {
   position: absolute;
+  inset: 0;
+  cursor: pointer;
   background-color: #ccc;
   border-radius: 34px;
   transition: background-color 0.4s;
-  cursor: pointer;
-  inset: 0;
 }
 
 .slider::before {
@@ -380,12 +380,12 @@ header .container {
   left: 5%;
   width: 35%;
   height: auto;
-  background-color: var(--color-bg);
-  border-radius: 50%;
-  transition: all 0.4s;
-  transform: translateY(-50%);
   aspect-ratio: 1/1;
   content: "";
+  background-color: var(--color-bg);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: all 0.4s;
 }
 
 input:checked + .slider {
@@ -421,8 +421,8 @@ input:checked + .slider::before {
 
   #sidebar.open ~ #overlay.sidebar-overlay {
     z-index: 19;
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
   }
 
   .sidebar-wrapper ul.logo {
@@ -459,17 +459,17 @@ footer .container {
     "logo nav links"
     "copy copy copy";
   grid-template-columns: repeat(3, 1fr);
-  padding-block: var(--space-xs);
-  place-items: start center;
   row-gap: 3rem;
+  place-items: start center;
+  padding-block: var(--space-xs);
 
   .footer-logo {
     grid-area: logo;
 
     .logo {
+      margin-block-end: var(--space-xs);
       font-size: var(--font-1);
       font-weight: 500;
-      margin-block-end: var(--space-xs);
     }
   }
 
@@ -482,14 +482,14 @@ footer .container {
   }
 
   .footer-copyright {
-    text-align: center;
     grid-area: copy;
+    text-align: center;
   }
 
   a {
     display: flex;
-    align-items: center;
     gap: var(--space-xs);
+    align-items: center;
     width: fit-content;
     margin-block: var(--space-xs);
 
@@ -501,13 +501,13 @@ footer .container {
 
 @media (width <= 1024px) {
   footer .container {
-    gap: 1rem;
     grid-template-areas:
       "logo"
       "nav"
       "links"
       "copy";
     grid-template-columns: 1fr;
+    gap: 1rem;
     place-items: start;
 
     .footer-copyright {
@@ -519,11 +519,11 @@ footer .container {
 /* QUILL HANDLER */
 form .ql-toolbar.ql-snow {
   padding: 0;
+  margin-block: var(--space-xs);
   font-family: inherit;
   color: var(--color-text);
   border: none;
   border-bottom: 1px solid var(--color-surface-hover);
-  margin-block: var(--space-xs);
 }
 
 form .ql-container.ql-snow {
@@ -538,18 +538,64 @@ form .ql-container.ql-snow {
   }
 }
 
+/* MODAL HANDLER */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 21;
+  visibility: hidden;
+  width: min(90%, 900px);
+  height: auto;
+  color: var(--color-text);
+  background: var(--color-primary);
+  border-radius: var(--space-s);
+  opacity: 0;
+  translate: -50% -50%;
+  transition: all 500ms ease-in-out;
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    padding: var(--space-s);
+  }
+}
+
+.modal.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+#form-message button {
+  width: fit-content;
+  padding: var(--space-xs);
+  color: var(--color-text-inverse);
+  cursor: pointer;
+  background: var(--color-accent);
+  border-radius: var(--space-xs);
+}
+
+.modal.open ~ #overlay {
+  z-index: 20;
+  visibility: visible;
+  opacity: 1;
+}
+
 /* MESSAGE HANDLER */
 #message {
   position: fixed;
   bottom: var(--space-l);
   left: 50%;
+  visibility: hidden;
   padding: var(--space-xs);
   color: #fafafa;
   border-radius: var(--space-xs);
   opacity: 0;
-  transition: opacity 1500ms ease-in-out, visibility 1500ms ease-in-out;
   transform: translateX(-50%);
-  visibility: hidden;
+  transition:
+    opacity 1500ms ease-in-out,
+    visibility 1500ms ease-in-out;
 }
 
 #message.success {
@@ -561,8 +607,8 @@ form .ql-container.ql-snow {
 }
 
 #message.show {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
 }
 
 /* EDITOR HANDLER */
@@ -593,13 +639,13 @@ form .ql-container.ql-snow {
 
       button {
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         padding: var(--space-xs);
         color: var(--color-text);
+        cursor: pointer;
         background: var(--color-hover);
         border-radius: var(--space-xs);
-        cursor: pointer;
       }
 
       button:last-child {

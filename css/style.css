@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
-@import url("./modules/reset.css");
-@import url("./modules/variables.css");
-@import url("./modules/components.css");
-@import url("./modules/pages.css");
-@import url("https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@import url('./modules/reset.css');
+@import url('./modules/variables.css');
+@import url('./modules/components.css');
+@import url('./modules/pages.css');
+@import url('https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css');
 
 html {
   scroll-behavior: smooth;
@@ -11,8 +11,8 @@ html {
 
 body {
   max-width: 100%;
-  font-family: Poppins, sans-serif;
   color: var(--color-text);
+  font-family: Poppins, sans-serif;
   background: var(--color-bg);
 }
 
