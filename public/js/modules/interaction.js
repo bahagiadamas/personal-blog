@@ -78,102 +78,42 @@ function themeToggler() {
   });
 }
 
-function handleActiveLink() {
-  const navLinks = document.querySelectorAll("#navbar a");
-  const sections = document.querySelectorAll("section");
+function initFormSubmission() {
+  const form = document.getElementById("myForm");
+  if (!form) return;
 
-  function updateActiveLink() {
-    const scrollPosition = window.scrollY + window.innerHeight / 2;
+  const actionURL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSeSokqRoSC_3ohmiSDAoJR60k6gHRli2WwI9EHfF3gyAJ_51A/formResponse";
 
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute("id");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      if (
-        scrollPosition >= sectionTop &&
-        scrollPosition < sectionTop + sectionHeight
-      ) {
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${sectionId}`) {
-            link.classList.add("active");
-          }
-        });
-      }
-    });
-  }
+    const formData = new FormData(form);
 
-  window.addEventListener("scroll", updateActiveLink);
-  updateActiveLink();
-}
-
-function handleActivePage() {
-  const navLinks = document.querySelectorAll("#navPlaceholder a");
-  const currentPage = window.location.href;
-
-  navLinks.forEach((link) => {
-    if (link.href === currentPage) {
-      link.classList.add("active");
-    } else {
-      link.classList.remove("active");
-    }
+    fetch(actionURL, {
+      method: "POST",
+      body: formData,
+      mode: "no-cors",
+    })
+      .then(() => {
+        form.reset();
+        showPopup();
+      })
+      .catch(() => {});
   });
 }
 
-function initScaler(targetSelector, childSelector = null, customStyles = {}) {
-  const targetElement = document.querySelector(targetSelector);
-  const childElement = childSelector
-    ? targetElement?.querySelector(childSelector)
-    : null;
+function showPopup() {
+  const popup = document.getElementById("form-message");
+  if (popup) {
+    popup.classList.add("open");
+  }
+}
 
-  const originalChildTransform = childElement
-    ? window.getComputedStyle(childElement).transform
-    : null;
-
-  if (targetElement) {
-    function scaleBackground() {
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        const scaleFactor = 1 + scrollY / 2000;
-        const maxScale = 1.25;
-        const currentScale = Math.min(scaleFactor, maxScale);
-        const blurRadius = Math.max(1, Math.min(scrollY / 40, 8));
-
-        targetElement.style.transform = `scale(${currentScale})`;
-        targetElement.style.transformOrigin = "center center";
-        targetElement.style.setProperty(
-          "--backdrop-blur-radius",
-          `${blurRadius}px`
-        );
-
-        if (childElement) {
-          const invertScale = 1 / currentScale;
-
-          let baseTransform =
-            originalChildTransform && originalChildTransform !== "none"
-              ? originalChildTransform
-              : "";
-
-          if (customStyles.transform) {
-            baseTransform = customStyles.transform;
-          }
-
-          const finalTransform = `${baseTransform} scale(${invertScale})`;
-          childElement.style.transform = finalTransform;
-          childElement.style.transformOrigin = "center center";
-
-          Object.keys(customStyles).forEach((styleProp) => {
-            if (styleProp !== "transform") {
-              childElement.style[styleProp] = customStyles[styleProp];
-            }
-          });
-        }
-      });
-    }
-
-    scaleBackground();
-    window.addEventListener("scroll", scaleBackground);
+function closePopup() {
+  const popupElement = document.getElementById("form-message");
+  if (popupElement) {
+    popupElement.classList.remove("open");
   }
 }
 
@@ -186,7 +126,7 @@ export {
   openForm,
   closeForm,
   themeToggler,
-  handleActiveLink,
-  handleActivePage,
-  initScaler,
+  initFormSubmission,
+  showPopup,
+  closePopup,
 };

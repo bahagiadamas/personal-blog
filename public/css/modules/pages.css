@@ -832,7 +832,7 @@ section#admin-page {
           background-color: var(--color-hover);
         }
 
-        tbody tr:hover .project_title {
+        tbody .project_title:hover {
           color: var(--color-accent);
           text-decoration: underline;
         }

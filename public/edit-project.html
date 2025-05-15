@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -68,12 +68,7 @@
     <div id="message"></div>
 
     <script type="module">
-      import { db, auth } from "./js/modules/database.js";
-      import {
-        doc,
-        getDoc,
-        updateDoc,
-      } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+      import * as firebase from "./js/modules/firebase.js";
 
       let quillEdit;
       let projectId;
@@ -83,7 +78,7 @@
         const unverifiedSection = document.querySelector(".logged-out");
         const authMessage = document.querySelector(".auth-message");
 
-        auth.onAuthStateChanged((user) => {
+        firebase.onAuthStateChanged(firebase.auth, (user) => {
           if (!user) {
             if (unverifiedSection) {
               unverifiedSection.style.display = "block";
@@ -140,7 +135,7 @@
           });
         }
 
-        const projectDoc = await getDoc(doc(db, "projects", projectId));
+        const projectDoc = await firebase.getDoc(firebase.doc(firebase.db, "projects", projectId));
         if (projectDoc.exists()) {
           const projectData = projectDoc.data();
           document.getElementById("title-edit").value = projectData.title || "";
@@ -251,7 +246,7 @@
           }
 
           try {
-            await updateDoc(doc(db, "projects", projectId), updateData);
+            await firebase.updateDoc(firebase.doc(firebase.db, "projects", projectId), updateData);
             console.log(`Proyek dengan ID ${projectId} berhasil diperbarui!`);
 
             messageDiv.textContent = "Project successfully updated!";

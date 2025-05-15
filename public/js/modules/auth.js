@@ -1,16 +1,9 @@
-// auth.js
-import { auth } from "./modules/database.js"
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
+import * as firebase from "./firebase.js"
 
 async function signInWithGoogle() {
-  const provider = new GoogleAuthProvider();
+  const provider = new firebase.GoogleAuthProvider();
   try {
-    await signInWithPopup(auth, provider);
+    await firebase.signInWithPopup(firebase.auth, provider);
   } catch (error) {
     console.error("Google Sign-in Error:", error);
     alert("Gagal login dengan Google.");
@@ -19,7 +12,7 @@ async function signInWithGoogle() {
 
 async function logoutAdmin() {
   try {
-    await signOut(auth);
+    await firebase.signOut(firebase.auth);
     console.log("Admin logged out successfully!");
     window.location.reload();
   } catch (error) {
@@ -29,7 +22,7 @@ async function logoutAdmin() {
 }
 
 function monitorAuthState(callback) {
-  onAuthStateChanged(auth, callback);
+  firebase.onAuthStateChanged(firebase.auth, callback);
 }
 
 export { signInWithGoogle, logoutAdmin, monitorAuthState };
