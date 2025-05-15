@@ -62,18 +62,15 @@
     <div id="message">KOCAK GAMING</div>
 
     <script type="module">
-      import { db, auth } from "./js/modules/database.js";
-      import {
-        addDoc,
-        collection,
-      } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+      import * as firebase from "./js/modules/firebase.js"
+      import * as auth from "./js/modules/auth.js"
 
       document.addEventListener("DOMContentLoaded", () => {
         const verifiedSection = document.querySelector(".logged-in");
         const unverifiedSection = document.querySelector(".logged-out");
         const authMessage = document.querySelector(".auth-message");
 
-        auth.onAuthStateChanged((user) => {
+        firebase.onAuthStateChanged(firebase.auth, (user) => {
           if (!user) {
             if (unverifiedSection) {
               unverifiedSection.style.display = "block";
@@ -172,7 +169,7 @@
               );
 
               try {
-                const docRef = await addDoc(collection(db, "projects"), {
+                const docRef = await firebase.addDoc(firebase.collection(firebase.db, "projects"), {
                   title: title,
                   imgUrl: adjustedImgUrl,
                   description: description,
