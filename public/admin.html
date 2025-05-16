@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,22 +30,34 @@
             <h3 class="auth-message"></h3>
           </div>
           <div class="logged-in">
-            <table>
-              <caption>
+            <div class="collection-wrapper">
+              <div class="collection-head">
                 <h3>Project List</h3>
-                <div id="addItem">
-                  <ion-icon name="add-outline"></ion-icon>
-                  <span>Add Item</span>
-                </div>
-              </caption>
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="list-placeholder"></tbody>
-            </table>
+                <input
+                  id="searchProject"
+                  type="search"
+                  placeholder="Search Project..."
+                />
+                <button id="addItem">+ Project</button>
+              </div>
+              <div class="collection-body" id="project_placeholder">
+                <div class="not-found"></div>
+              </div>
+            </div>
+
+            <div class="collection-wrapper">
+              <div class="collection-head">
+                <h3>User List</h3>
+                <input
+                  id="searchUser"
+                  type="search"
+                  placeholder="Search User..."
+                />
+              </div>
+              <div class="collection-body" id="user_placeholder">
+                <div class="not-found"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

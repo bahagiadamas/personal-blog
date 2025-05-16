@@ -77,10 +77,18 @@ function displayNav(projects) {
 
 function displayProjects(projects, placeholderId) {
   const placeholder = document.getElementById(placeholderId);
+  if (!placeholder) return;
+
+  const notFoundEl = placeholder.querySelector(".not-found");
+
+  placeholder.innerHTML = "";
+
+  if (notFoundEl) {
+    placeholder.appendChild(notFoundEl);
+    notFoundEl.style.display = "none";
+  }
 
   if (placeholder) {
-    placeholder.innerHTML = "";
-
     projects.forEach((project) => {
       if (placeholderId === "project-wrapper") {
         const projectItem = document.createElement("div");
@@ -105,16 +113,14 @@ function displayProjects(projects, placeholderId) {
         projectItem.appendChild(imgWrapper);
         projectItem.appendChild(titleElement);
         placeholder.appendChild(projectItem);
-
-        ui.initScrollReveal();
-      } else if (placeholderId === "list-placeholder") {
-        const projectItem = document.createElement("tr");
+      } else if (placeholderId === "project_placeholder") {
+        const projectItem = document.createElement("div");
+        projectItem.className = "collection-item project popup";
         projectItem.dataset.projectId = project.id;
 
-        const projectTitle = document.createElement("td");
+        const projectTitle = document.createElement("span");
         projectTitle.className = "project_title";
         projectTitle.textContent = project.title;
-        projectTitle.style.cursor = "pointer";
         projectTitle.addEventListener("click", () => {
           window.location.href = `project-detail.html?id=${project.id}`;
         });
@@ -124,18 +130,20 @@ function displayProjects(projects, placeholderId) {
         projectDescriptionCell.textContent = project.description || "";
         projectDescriptionCell.style.display = "none";
 
-        const actionButton = document.createElement("td");
+        const actionButton = document.createElement("span");
         actionButton.className = "action_button";
-        const editBtn = document.createElement("span");
-        editBtn.className = "edit-btn";
-        editBtn.innerHTML = '<ion-icon name="pencil-outline"></ion-icon>';
-        editBtn.addEventListener("click", editItem);
-        const deleteBtn = document.createElement("span");
-        deleteBtn.className = "delete-btn";
-        deleteBtn.innerHTML = '<ion-icon name="trash-outline"></ion-icon>';
-        deleteBtn.addEventListener("click", () => deleteProject(project.id));
-        actionButton.append(editBtn, deleteBtn);
 
+        const editBtn = document.createElement("ion-icon");
+        editBtn.className = "edit-btn";
+        editBtn.name = "pencil-outline";
+        editBtn.addEventListener("click", editItem);
+
+        const deleteBtn = document.createElement("ion-icon");
+        deleteBtn.className = "delete-btn";
+        deleteBtn.name = "trash-outline";
+        deleteBtn.addEventListener("click", () => deleteProject(project.id));
+
+        actionButton.append(editBtn, deleteBtn);
         projectItem.append(projectTitle, projectDescriptionCell, actionButton);
         placeholder.appendChild(projectItem);
       } else {
@@ -145,11 +153,13 @@ function displayProjects(projects, placeholderId) {
   } else {
     console.error(`Element with ID "${placeholderId}" not found.`);
   }
+  
+  ui.initScrollReveal();
 }
 
 function editItem(event) {
   const btn = event.target.closest(".edit-btn");
-  const projectRow = btn?.closest("tr");
+  const projectRow = btn?.closest(".collection-item");
 
   if (projectRow) {
     const projectId =
@@ -169,7 +179,9 @@ function editItem(event) {
 async function deleteProject(projectId) {
   if (confirm("Apakah Anda yakin ingin menghapus proyek ini?")) {
     try {
-      await firebase.deleteDoc(firebase.doc(firebase.db, "projects", projectId));
+      await firebase.deleteDoc(
+        firebase.doc(firebase.db, "projects", projectId)
+      );
       console.log(`Project with ID ${projectId} deleted successfully!`);
       loadProjectData();
     } catch (error) {
@@ -245,8 +257,12 @@ function displayProject(project) {
   }
 }
 
-async function loadProjectData() {
-  const projects = await firebase.getData("projects");
+async function loadProjectData(callback) {
+  const projects = await firebase.getData("projects", "createdAt");
+
+  if (typeof callback === "function") {
+    callback(projects);
+  }
 
   if (document.getElementById("featurePlaceholder")) {
     displayFeature(projects);
@@ -257,8 +273,8 @@ async function loadProjectData() {
   if (document.getElementById("project-wrapper")) {
     displayProjects(projects, "project-wrapper");
   }
-  if (document.getElementById("list-placeholder")) {
-    displayProjects(projects, "list-placeholder");
+  if (document.getElementById("project_placeholder")) {
+    displayProjects(projects, "project_placeholder");
   }
 
   if (document.querySelector(".swiper")) {
@@ -266,4 +282,8 @@ async function loadProjectData() {
   }
 }
 
-export { fetchProjectDetail, loadProjectData };
+function logProjects(projects) {
+  console.log("Data loaded :", projects);
+}
+
+export { fetchProjectDetail, loadProjectData, logProjects };

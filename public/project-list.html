@@ -1,10 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore projects that support shrimp farmers with digital tools and promote smart waste management using AI to build a more sustainable world."
+    />
     <script defer type="module" src="js/index.js"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="css/style.css" />
     <title>Projects & Initiatives | D B I CIPTA</title>
   </head>
@@ -15,14 +18,32 @@
     <main>
       <section id="project-list">
         <div class="container">
-          <h2>My Project & Initiatives</h2>
-          <div id="project-wrapper" class="project-wrapper"></div>
+          <div class="heading">
+            <h2>My Project & Initiatives</h2>
+            <input
+              id="searchProject"
+              type="search"
+              placeholder="Search Project..."
+              autocomplete="off"
+            />
+          </div>
+          <div id="project-wrapper" class="project-wrapper">
+            <div class="not-found"></div>
+          </div>
         </div>
       </section>
 
       <footer id="footer"></footer>
     </main>
 
-    <script type="module" src="js/modules/database.js"></script>
+    <script type="module">
+      import * as int from "./js/modules/interaction.js";
+      int.initSearch(
+        "searchProject",
+        "project-wrapper",
+        ".project-item",
+        ".project-title"
+      );
+    </script>
   </body>
 </html>

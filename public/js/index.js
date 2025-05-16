@@ -8,6 +8,7 @@ async function initializeApp() {
     firebase.logEvent(firebase.analytics, "page_view");
     ui.initIcon();
     ui.initFavicon();
+    ui.initScrollReveal();
 
     // BACKGROUND SCALER
     if (document.querySelector("section#hero")) {

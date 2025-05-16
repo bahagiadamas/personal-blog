@@ -69,52 +69,13 @@
 
     <script type="module">
       import * as firebase from "./js/modules/firebase.js";
+      import { adminInit } from "./js/admin.js";
 
       let quillEdit;
       let projectId;
 
       document.addEventListener("DOMContentLoaded", async () => {
-        const verifiedSection = document.querySelector(".logged-in");
-        const unverifiedSection = document.querySelector(".logged-out");
-        const authMessage = document.querySelector(".auth-message");
-
-        firebase.onAuthStateChanged(firebase.auth, (user) => {
-          if (!user) {
-            if (unverifiedSection) {
-              unverifiedSection.style.display = "block";
-            }
-            if (verifiedSection) {
-              verifiedSection.style.display = "none";
-            }
-            if (authMessage) {
-              authMessage.textContent =
-                "You are not logged in, please login to verify your identity";
-            }
-          } else {
-            if (user.uid === "Dz1UtNSZcRdE1GAHKhotC7Li4Al2") {
-              if (verifiedSection) {
-                verifiedSection.style.display = "block";
-              }
-              if (unverifiedSection) {
-                unverifiedSection.style.display = "none";
-              }
-              if (authMessage) {
-                authMessage.textContent = "";
-              }
-            } else {
-              if (verifiedSection) {
-                verifiedSection.style.display = "none";
-              }
-              if (unverifiedSection) {
-                unverifiedSection.style.display = "block";
-              }
-              if (authMessage) {
-                authMessage.textContent =
-                  "You are not authorized to access this page";
-              }
-            }
-          }
-        });
+        adminInit();
 
         const params = new URLSearchParams(window.location.search);
         projectId = params.get("id");

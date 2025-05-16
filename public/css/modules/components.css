@@ -230,6 +230,7 @@ header .container {
 }
 
 .sidebar-wrapper .settings {
+  padding-top: var(--space-xs);
   margin-top: auto;
   border-top: 2px solid var(--color-hover);
 }

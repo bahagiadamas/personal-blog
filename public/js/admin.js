@@ -1,6 +1,8 @@
 import * as firebase from "./modules/firebase.js";
 import * as auth from "./modules/auth.js";
 import * as project from "./modules/project.js";
+import * as usr from "./modules/user.js";
+import * as int from "./modules/interaction.js";
 
 function addItem() {
   window.location.href = "new-project.html";
@@ -40,17 +42,28 @@ function handleAuthState(user) {
       logoutGoogleBtn.addEventListener("click", auth.logoutAdmin);
     }
 
-    if (user.uid === "Dz1UtNSZcRdE1GAHKhotC7Li4Al2") {
-      if (verifiedSection) {
-        verifiedSection.style.display = "block";
+    const adminUids = [
+      "Dz1UtNSZcRdE1GAHKhotC7Li4Al2",
+      "Ha55NDmzPRTjeSrx3vTd0pcsh9a2",
+    ];
+
+    if (user && adminUids.includes(user.uid)) {
+      try {
+        if (verifiedSection) {
+          verifiedSection.style.display = "block";
+        }
+        if (unverifiedSection) {
+          unverifiedSection.style.display = "none";
+        }
+        if (authMessage) {
+          authMessage.textContent = "";
+        }
+        project.loadProjectData(project.logProjects);
+        usr.loadUserData(usr.logUsers);
+        console.log("Access Granted.");
+      } catch (error) {
+        console.error("Access Denied.");
       }
-      if (unverifiedSection) {
-        unverifiedSection.style.display = "none";
-      }
-      if (authMessage) {
-        authMessage.textContent = "";
-      }
-      project.loadProjectData();
     } else {
       if (verifiedSection) {
         verifiedSection.style.display = "none";
@@ -67,7 +80,23 @@ function handleAuthState(user) {
 
 async function adminInit() {
   firebase.auth.onAuthStateChanged(handleAuthState);
-  document.getElementById("addItem").addEventListener("click", addItem);
+  if (document.getElementById("addItem")) {
+    document.getElementById("addItem").addEventListener("click", addItem);
+  }
+  int.initSearch(
+    "searchProject",
+    "project_placeholder",
+    ".collection-item.project",
+    ".project_title"
+  );
+  int.initSearch(
+    "searchUser",
+    "user_placeholder",
+    ".collection-item.user",
+    ".user_name"
+  );
 }
 
 document.addEventListener("DOMContentLoaded", adminInit);
+
+export { adminInit };
