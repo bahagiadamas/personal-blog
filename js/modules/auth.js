@@ -1,9 +1,12 @@
-import * as firebase from "./firebase.js"
+import * as firebase from "./firebase.js";
 
 async function signInWithGoogle() {
   const provider = new firebase.GoogleAuthProvider();
   try {
-    await firebase.signInWithPopup(firebase.auth, provider);
+    const result = await firebase.signInWithPopup(firebase.auth, provider);
+    const user = result.user;
+    console.log("User UID:", user.uid);
+    await firebase.saveUserData(user);
   } catch (error) {
     console.error("Google Sign-in Error:", error);
     alert("Gagal login dengan Google.");

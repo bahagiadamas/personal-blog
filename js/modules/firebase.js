@@ -38,14 +38,57 @@ const db = getFirestore(app);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
-async function getData(collectionName, orderByField = "createdAt") {
-  try {
-    const q = query(
-      collection(db, collectionName),
-      orderBy(orderByField, "asc")
-    );
-    const querySnapshot = await getDocs(q);
+function formatToGMT7(date) {
+  const options = {
+    timeZone: "Asia/Jakarta",
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  };
 
+  return new Intl.DateTimeFormat("en-GB", options).format(date) + " GMT+7";
+}
+
+async function saveUserData(user) {
+  if (user) {
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    const joined = formatToGMT7(new Date(user.metadata.creationTime));
+    const lastSeen = formatToGMT7(new Date());
+
+    if (!userSnap.exists()) {
+      const { displayName, email, photoURL } = user;
+      await setDoc(userRef, {
+        displayName: displayName || "",
+        email: email || "",
+        photoURL: photoURL || "",
+        providerId: user.providerData[0]?.providerId || "google.com",
+        creationTime: joined,
+        lastSignInTime: lastSeen,
+      });
+      console.log("Data pengguna Google baru disimpan ke Firestore.");
+    } else {
+      await updateDoc(userRef, {
+        lastSignInTime: lastSeen,
+      });
+    }
+  }
+}
+
+async function getData(collectionName, orderByField = null) {
+  try {
+    let q;
+    if (orderByField) {
+      q = query(collection(db, collectionName), orderBy(orderByField, "asc"));
+    } else {
+      q = query(collection(db, collectionName));
+    }
+    const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -77,4 +120,5 @@ export {
   onAuthStateChanged,
   addDoc,
   deleteDoc,
+  saveUserData,
 };

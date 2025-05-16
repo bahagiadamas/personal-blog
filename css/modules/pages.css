@@ -603,19 +603,36 @@ section#project-list {
 #project-list .container {
   position: relative;
 
-  #addProjectBtn {
-    position: absolute;
-    top: 0;
-    right: var(--space-s-l);
+  .heading {
     display: flex;
-    gap: var(--space-xs);
     align-items: center;
-    padding: var(--space-xs);
-    font-size: var(--font-0);
-    color: var(--color-text-inverse);
-    cursor: pointer;
-    background: var(--color-accent);
-    border-radius: var(--space-s);
+    justify-content: space-between;
+
+    input {
+      width: 40%;
+      padding: var(--space-xs);
+      color: var(--color-text);
+      background: var(--color-hover);
+      border-radius: var(--space-xs);
+      transition: 300ms ease-in-out;
+
+      &:focus {
+        box-shadow: 0 0 4px var(--color-shadow);
+      }
+    }
+  }
+}
+
+@media (width <= 1024px) {
+  #project-list .container .heading {
+    flex-direction: column;
+    gap: var(--space-m);
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    input {
+      width: 100%;
+    }
   }
 }
 
@@ -731,8 +748,8 @@ section#project-detail {
   .container {
     position: relative;
     z-index: 3;
-    max-width: 100%;
     padding: var(--space-s) var(--space-s-xl);
+    overflow-x: hidden;
     background: var(--color-bg);
 
     .project-desc {
@@ -756,17 +773,24 @@ section#project-detail {
 /* ADMIN PANEL */
 #admin-panel {
   display: grid;
+  grid-template-areas: "sidebar main";
   grid-template-columns: auto 1fr;
+
+  #sidebar {
+    grid-area: sidebar;
+  }
+
+  main {
+    grid-area: main;
+  }
 }
 
 section#admin-page {
-  max-width: 100dvw;
   min-height: 100dvh;
   padding-top: calc(48px + var(--space-l));
 
   .container {
     position: relative;
-    max-width: 100%;
 
     .login-handler {
       position: absolute;
@@ -786,89 +810,110 @@ section#admin-page {
         border-radius: var(--space-xs);
       }
     }
+  }
+}
 
-    .logged-in {
-      margin-block: var(--space-m);
+.logged-in {
+  margin-block: var(--space-m);
+}
 
-      #addItem {
-        position: absolute;
-        top: 0;
-        right: 0;
+.collection-wrapper {
+  width: 100%;
+
+  .collection-head {
+    display: flex;
+    gap: var(--space-s);
+    align-items: center;
+
+    input {
+      width: 40%;
+      padding: var(--space-xs);
+      margin-left: auto;
+      color: var(--color-text);
+      background: var(--color-hover);
+      border-radius: var(--space-xs);
+      transition: 300ms ease-in-out;
+
+      &:focus {
+        box-shadow: 0 0 4px var(--color-shadow);
+      }
+    }
+
+    button {
+      padding: var(--space-xs);
+      color: var(--color-text-inverse);
+      cursor: pointer;
+      background: var(--color-accent);
+      border-radius: var(--space-xs);
+    }
+  }
+
+  .collection-body {
+    max-height: 100dvh;
+    padding: var(--space-xs) 0;
+    margin: var(--space-m) 0;
+
+    .collection-item:nth-child(odd) {
+      background: var(--color-surface);
+    }
+
+    .collection-item {
+      display: flex;
+      gap: var(--space-xs);
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-xs);
+      border-radius: var(--space-xs);
+
+      .action_button {
         display: flex;
         gap: var(--space-xs);
         align-items: center;
-        padding: var(--space-xs);
-        color: var(--color-text-inverse);
-        cursor: pointer;
-        user-select: none;
-        background: var(--color-accent);
-        border-radius: var(--space-xs);
-      }
 
-      table {
-        width: 100%;
-        margin: var(--space-m) 0;
-        overflow-x: scroll;
-        border-collapse: collapse;
-
-        caption {
-          position: relative;
-          margin-block: var(--space-s);
-          text-align: left;
-        }
-
-        thead {
-          position: sticky;
-          top: 0;
-          left: 0;
-          background: var(--color-primary);
-
-          th {
-            padding: var(--space-xs);
-          }
-        }
-
-        tbody tr:nth-child(even) {
-          background-color: var(--color-hover);
-        }
-
-        tbody .project_title:hover {
-          color: var(--color-accent);
-          text-decoration: underline;
-        }
-
-        tbody tr td {
+        ion-icon {
           padding: var(--space-xs);
+          color: var(--color-text-inverse);
+          cursor: pointer;
+          background: var(--color-accent);
+          border-radius: var(--space-xs);
         }
 
-        tbody tr td.action_button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          span {
-            margin-inline: 5px;
-
-            ion-icon {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              padding: var(--space-xs);
-              color: var(--color-text-inverse);
-              cursor: pointer;
-              border-radius: var(--space-xs);
-            }
-          }
-
-          span.edit-btn ion-icon {
-            background: var(--color-accent);
-          }
-
-          span.delete-btn ion-icon {
-            background: rgb(208 21 21);
-          }
+        .delete-btn {
+          background: red;
         }
       }
+    }
+
+    .collection-item.user {
+      gap: var(--space-s);
+      justify-content: flex-start;
+
+      img {
+        max-width: 48px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.project_title {
+  user-select: none;
+
+  &:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+@media (width <=1024px) {
+  .collection-wrapper .collection-head {
+    flex-direction: column;
+    align-items: flex-start;
+
+    input {
+      width: 100%;
+      margin-left: 0;
     }
   }
 }

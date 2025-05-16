@@ -35,7 +35,31 @@ async function initIcon() {
   document.head.appendChild(ionicons);
 }
 
+function loadScrollRevealScript() {
+  return new Promise((resolve, reject) => {
+    const existingScript = document.querySelector(
+      'script[src*="scrollreveal"]'
+    );
+    if (existingScript) {
+      existingScript.addEventListener("load", resolve);
+      existingScript.addEventListener("error", reject);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://unpkg.com/scrollreveal";
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = () => reject(new Error("Gagal memuat ScrollReveal."));
+    document.head.appendChild(script);
+  });
+}
+
 async function initScrollReveal() {
+  if (typeof ScrollReveal === "undefined") {
+    await loadScrollRevealScript();
+  }
+  
   const popups = document.querySelectorAll(".popup");
   const parents = [...new Set([...popups].map((el) => el.parentElement))];
 

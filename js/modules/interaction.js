@@ -117,6 +117,35 @@ function closePopup() {
   }
 }
 
+function initSearch(inputId, placeholderId, itemSelector, textSelector) {
+  const input = document.getElementById(inputId);
+  const placeholder = document.getElementById(placeholderId);
+
+  if (!input || !placeholder) return;
+
+  const notFoundEl = placeholder.querySelector(".not-found");
+
+  input.addEventListener("input", function () {
+    const searchTerm = this.value.toLowerCase();
+    const items = placeholder.querySelectorAll(itemSelector);
+    let matchCount = 0;
+
+    items.forEach((item) => {
+      const text =
+        item.querySelector(textSelector)?.textContent.toLowerCase() || "";
+      const isMatch = text.includes(searchTerm);
+
+      item.style.display = isMatch ? "flex" : "none";
+      if (isMatch) matchCount++;
+    });
+
+    if (notFoundEl) {
+      notFoundEl.textContent = "No Match Found.";
+      notFoundEl.style.display = matchCount === 0 ? "block" : "none";
+    }
+  });
+}
+
 export {
   toggleNavbar,
   closeNavbar,
@@ -129,4 +158,5 @@ export {
   initFormSubmission,
   showPopup,
   closePopup,
+  initSearch,
 };
