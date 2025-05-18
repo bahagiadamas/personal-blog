@@ -2,6 +2,8 @@ import * as firebase from "./modules/firebase.js";
 import * as ui from "./modules/ui.js";
 import * as project from "./modules/project.js";
 import * as int from "./modules/interaction.js";
+import * as usr from "./modules/user.js";
+
 
 async function initializeApp() {
   try {
@@ -57,7 +59,10 @@ async function initializeApp() {
     await project.loadProjectData();
     // LOAD DETAIL
     if (document.getElementById("detail-wrapper")) {
-      project.fetchProjectDetail();
+      await project.fetchProjectDetail();
+    }
+    if (document.getElementById("user_detail_placeholder")) {
+      await usr.fetchUserDetail();
     }
     // QUILL INIT
     if (document.querySelector("#editor-container")) {

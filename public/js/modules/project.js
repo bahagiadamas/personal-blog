@@ -18,7 +18,7 @@ function displayFeature(projects) {
       projectItem.dataset.projectId = project.id;
 
       projectItem.addEventListener("click", () => {
-        window.location.href = `project-detail.html?id=${project.id}`;
+        window.location.href = `project.html?id=${project.id}`;
       });
 
       const imgWrapper = document.createElement("div");
@@ -57,7 +57,7 @@ function displayNav(projects) {
       projects.forEach((project) => {
         const listItem = document.createElement("li");
         const linkItem = document.createElement("a");
-        linkItem.href = `project-detail.html?id=${project.id}`;
+        linkItem.href = `project.html?id=${project.id}`;
         linkItem.className = "nav-project-title";
         linkItem.textContent = project.title;
         listItem.appendChild(linkItem);
@@ -95,7 +95,7 @@ function displayProjects(projects, placeholderId) {
         projectItem.className = "project-item popup";
         projectItem.dataset.projectId = project.id;
         projectItem.addEventListener("click", () => {
-          window.location.href = `project-detail.html?id=${project.id}`;
+          window.location.href = `project.html?id=${project.id}`;
         });
 
         const imgWrapper = document.createElement("div");
@@ -122,7 +122,7 @@ function displayProjects(projects, placeholderId) {
         projectTitle.className = "project_title";
         projectTitle.textContent = project.title;
         projectTitle.addEventListener("click", () => {
-          window.location.href = `project-detail.html?id=${project.id}`;
+          window.location.href = `project.html?id=${project.id}`;
         });
 
         const projectDescriptionCell = document.createElement("td");
@@ -192,10 +192,10 @@ async function deleteProject(projectId) {
 }
 
 async function fetchProjectDetail() {
-  const proejctId = getProjectId();
+  const projectId = getProjectId();
   const projectPlaceholder = document.getElementById("detail-wrapper");
 
-  if (!proejctId) {
+  if (!projectId) {
     console.error("Project ID is missing!");
     projectPlaceholder.innerHTML =
       "<p class='error-message'>Project not found.</p>";
@@ -203,7 +203,7 @@ async function fetchProjectDetail() {
   }
 
   try {
-    const projectRef = firebase.doc(firebase.db, "projects", proejctId);
+    const projectRef = firebase.doc(firebase.db, "projects", projectId);
     const projectSnap = await firebase.getDoc(projectRef);
 
     if (projectSnap.exists()) {
